@@ -12,6 +12,7 @@ import {
 import { createGameplayTerrainGroup, createTreeLeavesGroup } from './gameplayTerrain';
 import { createGameplayWaterMesh, setGameplayWaterLight } from './gameplayWater';
 import { gameplayGeometryPaths, introTexturePaths } from './introAssets';
+import { withBase } from './assetPath';
 import { loadDracoGeometry } from './loadGeometry';
 import { initKtx2Loader, loadKtx2Texture } from './loadTextures';
 import { attachGameplayProps, createPropMaterial } from './postProcessing';
@@ -61,7 +62,7 @@ export async function createGameplaySceneGroup(renderer: WebGLRenderer): Promise
 		cloudNoise512,
 		treeLeavesTexture
 	] = await Promise.all([
-		textureLoader.loadAsync(introTexturePaths.atlas),
+		textureLoader.loadAsync(withBase(introTexturePaths.atlas)),
 		loadKtx2Texture(introTexturePaths.lut),
 		loadKtx2Texture(introTexturePaths.noiseTerrain),
 		loadKtx2Texture(introTexturePaths.noiseSimplex),

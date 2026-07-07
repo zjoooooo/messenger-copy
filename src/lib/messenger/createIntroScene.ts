@@ -3,6 +3,7 @@ import type { Texture, WebGLRenderer } from 'three';
 import { loadDracoGeometry } from './loadGeometry';
 import { introGeometryPaths, introTexturePaths } from './introAssets';
 import { initKtx2Loader, loadKtx2Texture } from './loadTextures';
+import { withBase } from './assetPath';
 import { createMessengerMaterials } from './materials';
 
 const textureLoader = new TextureLoader();
@@ -41,7 +42,7 @@ export async function loadIntroTextures(renderer: WebGLRenderer): Promise<{
 }> {
 	initKtx2Loader(renderer);
 	const [atlas, noise] = await Promise.all([
-		textureLoader.loadAsync(introTexturePaths.atlas),
+		textureLoader.loadAsync(withBase(introTexturePaths.atlas)),
 		loadKtx2Texture(introTexturePaths.cloudNoise)
 	]);
 	return { atlas, noise };

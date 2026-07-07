@@ -1,23 +1,24 @@
 import type { BufferGeometry } from 'three';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { splitBatchedGeometry } from './splitBatchedGeometry';
+import { withBase } from './assetPath';
 
 let decoder: DRACOLoader | null = null;
 
 function getDecoder(): DRACOLoader {
 	if (!decoder) {
 		decoder = new DRACOLoader();
-		decoder.setDecoderPath('/draco/');
+		decoder.setDecoderPath(withBase('/draco/'));
 	}
 	return decoder;
 }
 
 export function loadDracoGeometry(path: string): Promise<BufferGeometry> {
-	return getDecoder().loadAsync(path);
+	return getDecoder().loadAsync(withBase(path));
 }
 
 export function loadBatchedDracoGeometries(path: string): Promise<BufferGeometry[]> {
-	return getDecoder().loadAsync(path).then(splitBatchedGeometry);
+	return getDecoder().loadAsync(withBase(path)).then(splitBatchedGeometry);
 }
 
 export function disposeDracoLoader(): void {
