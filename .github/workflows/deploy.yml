@@ -39,11 +39,10 @@ jobs:
           BASE_PATH: /messenger-copy
         run: pnpm build
 
+      # Requires a one-time repo setting: Settings -> Pages -> Source: GitHub Actions.
+      # (The automatic GITHUB_TOKEN cannot enable Pages via the API on this repo,
+      # so `enablement: true` is not usable here.)
       - uses: actions/configure-pages@v5
-        with:
-          # Enable Pages (build type = GitHub Actions) on the first run so no
-          # manual Settings -> Pages toggle is needed.
-          enablement: true
 
       - uses: actions/upload-pages-artifact@v3
         with:
