@@ -16,6 +16,7 @@ import {
 import { loadDracoGeometry } from './loadGeometry';
 import { introTexturePaths, npcGalleryEntries } from './introAssets';
 import { initKtx2Loader } from './loadTextures';
+import { withBase } from './assetPath';
 import { createMessengerMaterials } from './materials';
 import { createSkin, createSkinAnimation } from './skinMesh';
 
@@ -53,7 +54,7 @@ function placeNpcMesh(
 export async function createNpcGalleryGroup(renderer: WebGLRenderer): Promise<NpcGalleryBundle> {
 	initKtx2Loader(renderer);
 	const textureLoader = new TextureLoader();
-	const atlas = await textureLoader.loadAsync(introTexturePaths.atlas);
+	const atlas = await textureLoader.loadAsync(withBase(introTexturePaths.atlas));
 	const materials = createMessengerMaterials(atlas, atlas);
 	const npcMaterial = materials.atlas;
 
