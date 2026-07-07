@@ -40,6 +40,10 @@ jobs:
         run: pnpm build
 
       - uses: actions/configure-pages@v5
+        with:
+          # Enable Pages (build type = GitHub Actions) on the first run so no
+          # manual Settings -> Pages toggle is needed.
+          enablement: true
 
       - uses: actions/upload-pages-artifact@v3
         with:
